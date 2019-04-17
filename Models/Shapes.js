@@ -1,4 +1,4 @@
-class Shapes{
+class Shape{
     points = [[mouseX, mouseY]];
     lines = [0, 0, 400];
     ponto = [0,0];
@@ -46,7 +46,7 @@ class Shapes{
 
     ab(x1,y1,x2,y2){
         let a = ((y1-y2)/(x1-x2));
-        let b = y2+(x2*a);
+        let b = y2-(x2*a);
         return [a,b];
     }
 }
