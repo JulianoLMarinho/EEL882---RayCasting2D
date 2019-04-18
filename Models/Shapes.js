@@ -1,19 +1,33 @@
 class Shape{
     points = [[mouseX, mouseY]];
     lines = [0, 0, 400];
-    ponto = [0,0];
     stillDraw = true;
-    desenhaShape(){
+    desenhaShape(editar = false){
         if(this.points.length > 0){
             beginShape();
             for(let [x,y] of this.points){
+                if(editar){
+                    strokeWeight(8);
+                    point(x,y);
+                }
+                strokeWeight(1);
                 vertex(x,y);
             }
             if(this.stillDraw) vertex(mouseX, mouseY);
             endShape(CLOSE);
-            point(this.ponto[0], this.ponto[1]);
         }
     }
+
+    editarPonto(){
+        for(let i = 0; i<this.points.length; i++){
+            let t = ((this.points[i][0]-mouseX)**2)+((this.points[i][1]-mouseY)**2);
+            if(t<=16){
+                this.points[i][0] = mouseX;
+                this.points[i][1] = mouseY;
+            }
+        }
+    }
+
 
     mouseDentro(){
         let inter = 0;

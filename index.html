@@ -13,9 +13,16 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <p>Selecione o objeto:</p>
-          <button type="button" onclick="selecionaForma(0)" class="btn btn-light">Polígono</button>
-          <button type="button" onclick="selecionaForma(1)" class="btn btn-light">Raio</button>
+          <div class="col-md-12">
+            <p>Selecione o objeto:</p>
+            <button type="button" onclick="selecionaForma(0)" class="btn btn-light">Polígono</button>
+            <button type="button" onclick="selecionaForma(1)" class="btn btn-light">Raio</button>
+          </div>
+          <div class="col-md-12">
+            <p>Selecione a ação:</p>
+            <button type="button" onclick="selecionarAcao(0)" class="btn btn-light">Desenhar</button>
+            <button type="button" onclick="selecionarAcao(1)" class="btn btn-light">Editar</button>
+          </div>
         </div>
         <div class="col-md-8">
           <div id="sketch-holder"></div>
