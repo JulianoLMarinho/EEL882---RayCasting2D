@@ -6,6 +6,7 @@
     <script src="sketch.js"></script>
     <script src="Models/Shapes.js"></script>
     <script src="Models/Rays.js"></script>
+    <script src="jquery-3.4.0.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </head>
@@ -15,17 +16,42 @@
         <div class="col-md-4">
           <div class="col-md-12">
             <p>Selecione o objeto:</p>
-            <button type="button" onclick="selecionaForma(0)" class="btn btn-light">Polígono</button>
-            <button type="button" onclick="selecionaForma(1)" class="btn btn-light">Raio</button>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" onclick="selecionaForma(0)" name="exampleRadios" id="selecionar1" value="option1" checked>
+              <label class="form-check-label" for="selecionar1">
+                Polígono
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" onclick="selecionaForma(1)" id="selecionar2" value="option2">
+              <label class="form-check-label" for="selecionar2">
+                Raio
+              </label>
+            </div>
           </div>
           <div class="col-md-12">
             <p>Selecione a ação:</p>
-            <button type="button" onclick="selecionarAcao(0)" class="btn btn-light">Desenhar</button>
-            <button type="button" onclick="selecionarAcao(1)" class="btn btn-light">Editar</button>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" onclick="selecionarAcao(0)" name="editarFormas" id="editarFormas1" value="option1" checked>
+              <label class="form-check-label" for="editarFormas1">
+                Desenhar
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="editarFormas" onclick="selecionarAcao(1)" id="editarFormas2" value="option2">
+              <label class="form-check-label" for="editarFormas2">
+                Editar
+              </label>
+            </div>
           </div>
           <div class="col-md-12">
-            <p>Teste</p>
-            <button type="button" onclick="mostrarIntersec()" class="btn btn-light">Mostrar Intersecções</button>
+            <p>Opções</p>
+            <div class="form-check">
+              <input class="form-check-input" onclick="mostrarIntersec()" type="checkbox" value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                Mostrar Intersecções
+              </label>
+            </div>
           </div>
         </div>
         <div class="col-md-8">

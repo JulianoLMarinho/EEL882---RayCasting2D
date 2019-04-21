@@ -23,13 +23,6 @@ function setup() {
 
 function rlAction(){
     if(acao){
-        // for(let sh of shapes){
-        //     if(sh.editarPonto()) break;
-        // }
-        // for (let r of rays){
-        //     r.editarPonto();
-        // }
-
         for (let o of objetos){
             o.editarPonto();
         }
@@ -115,10 +108,19 @@ function dcAction() {
 }
 
 function selecionaForma(forma){
+
     tipo = forma;
 }
 
 function selecionarAcao(tacao){
+    if(tacao){
+        $("#selecionar1").attr('disabled', true);
+        $("#selecionar2").attr('disabled', true);
+    } else {
+        $("#selecionar1").attr('disabled', false);
+        $("#selecionar2").attr('disabled', false);
+
+    }
     acao = tacao;
 }
 

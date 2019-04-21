@@ -32,8 +32,8 @@ class Ray{
         line(this.x1,this.y1, (30*this.direction*cos(this.coefAng)+this.x1), (30*this.direction*sin(this.coefAng)+this.y1));
         strokeWeight(1);
         stroke(0);
-        for (let i = 0; i<1000; i++){
-            if (i%4==0) point((i*this.direction*cos(this.coefAng)+this.x1), (i*this.direction*sin(this.coefAng)+this.y1));
+        for (let i = 30; i<1000; i++){
+            if (i%6==0) point((i*this.direction*cos(this.coefAng)+this.x1), (i*this.direction*sin(this.coefAng)+this.y1));
         }
         if(editar){
             strokeWeight(5);
