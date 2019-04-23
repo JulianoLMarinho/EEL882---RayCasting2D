@@ -5,10 +5,9 @@ Computação Gráfica - RayCasting2D
 1. Versão online no link: [https://julianolmarinho.github.io/EEL882-RayCasting2D](https://julianolmarinho.github.io/EEL882-RayCasting2D).
 2. Usando a versão do repositório: 
 - Clonar o repositório
-- Abrir arquivo index.html em um navegador
-- Interagir com a interface definida
+- Abrir arquivo index.html no browser
 
-## Instruções
+## Instruções de Uso
 ### Criação de objetos: 
 
 1. Selecionar o obeto a ser desenhado (Polígono como padrão) 
