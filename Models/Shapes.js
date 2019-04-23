@@ -8,7 +8,7 @@ class Shape{
     desenhaObjeto(editar = false, intersec, raios){
         if(this.points.length > 0){
             beginShape();
-            fill('rgba(255,0,250, 0.25)');
+            fill('rgba(255,0,250, 0.2)');
             for(let i = 0; i< this.points.length; i++){
                 if(editar){
                     strokeWeight(5);
@@ -19,6 +19,7 @@ class Shape{
                     }
                 }
                 if(this.editShape && editar){
+                    fill('rgba(255,0,250, 0.5)');
                     this.points[i][0] = this.points[i][0] - (pmouseX - mouseX);
                     this.points[i][1] = this.points[i][1] - (pmouseY - mouseY);
                 }
@@ -33,8 +34,8 @@ class Shape{
         }
     }
 
-    editarPonto(){
-        if(this.edit == -1 && !this.editShape){
+    editarPonto(editanto){
+        if(this.edit === -1 && !this.editShape && !editando){
             for(let i = 0; i<this.points.length; i++){
                 let t = ((this.points[i][0]-mouseX)**2)+((this.points[i][1]-mouseY)**2);
                 if(t<=16){
@@ -43,7 +44,9 @@ class Shape{
                 } else {
                     if(this.mouseDentro()){
                         this.editShape = true;
+                        return true;
                     }
+
                 }
             }
         } else {
@@ -64,20 +67,22 @@ class Shape{
             let ab2 = this.ab(mouseX, mouseY, 0, 0);
             let x = (ab2[1]-ab1[1])/(ab1[0]-ab2[0]);
             let y = (ab1[0]*x+ab1[1]);
-            if(x>Math.min(p[i][0],p[i+1][0]) &&
-                x<Math.max(p[i][0],p[i+1][0]) &&
-                y>Math.min(p[i][1],p[i+1][1]) &&
-                y<Math.max(p[i][1],p[i+1][1]) && x <= mouseX && y <= mouseY
+            if(ab2[0]**2===Infinity**2){
+                x = 0;
+                y = (ab1[0]*x+ab1[1]);
+            } else if(ab1[0]**2===Infinity**2) {
+                x = p[i][0];
+                y = ab2[0]*x+ab2[1];
+            }
+            if(x>=Math.min(p[i][0],p[i+1][0]) &&
+                x<=Math.max(p[i][0],p[i+1][0]) &&
+                y>=Math.min(p[i][1],p[i+1][1]) &&
+                y<=Math.max(p[i][1],p[i+1][1]) && x < mouseX && y < mouseY
             ) {
                 inter++;
             }
         }
-        if (inter%2==0){
-            return false;
-        } else {
-            console.log("dentro");
-            return true;
-        }
+        return inter % 2 !== 0;
 
 
     }
@@ -93,31 +98,6 @@ class Shape{
         return [a,b];
     }
 
-    origemPonto(pontos, x1, y1){
-        let inter = 0;
-        for(let i = 0; i<pontos.length; i++){
-            let ab1 = this.ab(pontos[i][0], pontos[i][1], pontos[i+1][0], pontos[i+1][1]);
-            let ab2 = this.ab(x1, y1, mouseX, mouseY);
-            let x = (ab2[1]-ab1[1])/(ab1[0]-ab2[0]);
-            if(ab2[0]**2==Infinity**2 || ab1[0]**2==Infinity**2){
-                x = x1;
-            }
-            let y = (ab1[0]*x+ab1[1]);
-            if(x>Math.min(pontos[i][0],pontos[i+1][0]) &&
-                x<Math.max(pontos[i][0],pontos[i+1][0]) &&
-                y>Math.min(pontos[i][1],pontos[i+1][1]) &&
-                y<Math.max(pontos[i][1],pontos[i+1][1]) && x <= mouseX && y <= mouseY
-            ) {
-                inter++;
-            }
-        }
-        if (inter%2==0){
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     intersec(raios){
         let p = this.points.slice();
         p.push([this.points[0][0], this.points[0][1]]);
@@ -127,23 +107,24 @@ class Shape{
                 let ab1 = this.ab(p[i][0], p[i][1], p[i+1][0], p[i+1][1]);
                 let ab2 = this.ab(r.x1, r.y1, r.x2, r.y2);
                 let x = (ab2[1]-ab1[1])/(ab1[0]-ab2[0]);
-                if(ab2[0]**2==Infinity**2 || ab1[0]**2==Infinity**2){
-                    x = r.x1;
-                }
-                console.log("ab1", ab1);
-                console.log("ab2", ab2);
                 let y = (ab1[0]*x+ab1[1]);
-                if(ab1[0]==0){
-                    y = p[i][1];
+                if(ab2[0]**2===Infinity**2){
+                    x = r.x1;
+                    y = (ab1[0]*x+ab1[1]);
+                } else if(ab1[0]**2===Infinity**2) {
+                    x = p[i][0];
+                    y = ab2[0]*x+ab2[1];
                 }
 
-                let tY = 1000*r.direction*sin(r.coefAng)+r.y1;
-                let tX = 1000*r.direction*cos(r.coefAng)+r.x1;
+
+
+                let tY = 5000*r.direction*sin(r.coefAng)+r.y1;
+                let tX = 5000*r.direction*cos(r.coefAng)+r.x1;
                 if(
-                    x>Math.min(p[i][0],p[i+1][0]) &&
-                    x<Math.max(p[i][0],p[i+1][0]) &&
-                    y>Math.min(p[i][1],p[i+1][1]) &&
-                    y<Math.max(p[i][1],p[i+1][1]) &&
+                    x>=Math.min(p[i][0],p[i+1][0]) &&
+                    x<=Math.max(p[i][0],p[i+1][0]) &&
+                    y>=Math.min(p[i][1],p[i+1][1]) &&
+                    y<=Math.max(p[i][1],p[i+1][1]) &&
                     (Math.max(tY, r.y1) >= y) &&
                     (Math.min(tY, r.y1) <= y) &&
                     (Math.max(tX, r.x1) >= x) &&
@@ -156,22 +137,13 @@ class Shape{
             inter.sort(function(a, b){
                 return (((r.x1 - a[0])**2)+((r.y1 - a[1])**2))-(((r.x1 - b[0])**2)+((r.y1 - b[1])**2))
             });
-            let color = 'green';
-            if(inter.length%2==0){
-                color = 'green';
-            } else {
-                color = 'red';
-            }
+            let color = inter.length%2===0?'green':'red';
             for (let [x,y] of inter){
                 stroke(color);
-                color = color=='green'?'red':'green';
+                color = color==='green'?'red':'green';
                 point(x,y);
                 stroke(0);
             }
         }
-    }
-
-    ordena(a,b){
-        return (a[0]**2+a[1]**2)-(b[0]**2+b[1]**2)
     }
 }

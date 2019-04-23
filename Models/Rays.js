@@ -8,6 +8,7 @@ class Ray{
     selecionadoAng = false;
     coefAng = 0;
     direction = 1;
+
     constructor(){
         this.x1 = mouseX;
         this.y1 = mouseY;
@@ -30,9 +31,9 @@ class Ray{
         strokeWeight(1);
         triangle(25*this.direction*cos(this.coefAng+0.3)+this.x1, (25*this.direction*sin(this.coefAng+0.3)+this.y1), 25*this.direction*cos(this.coefAng-0.3)+this.x1, (25*this.direction*sin(this.coefAng-0.3)+this.y1), 30*this.direction*cos(this.coefAng)+this.x1, (30*this.direction*sin(this.coefAng)+this.y1));
         line(this.x1,this.y1, (30*this.direction*cos(this.coefAng)+this.x1), (30*this.direction*sin(this.coefAng)+this.y1));
-        strokeWeight(1);
+        strokeWeight(1.5);
         stroke(0);
-        for (let i = 30; i<1000; i++){
+        for (let i = 30; i<5000; i++){
             if (i%6==0) point((i*this.direction*cos(this.coefAng)+this.x1), (i*this.direction*sin(this.coefAng)+this.y1));
         }
         if(editar){
@@ -53,10 +54,11 @@ class Ray{
         this.stillDraw = false;
     }
 
-    editarPonto(){
-        if(this.selecionadoAng || this.selecionado) {
+    editarPonto(editando){
+        if((this.selecionadoAng || this.selecionado) || editando) {
             this.selecionado = false;
             this.selecionadoAng = false;
+            return false;
         } else {
             if(!this.selecionado) {
                 let t = ((this.x1 - mouseX) ** 2) + ((this.y1 - mouseY) ** 2);
@@ -64,14 +66,13 @@ class Ray{
                     this.selecionado = true;
                     return true;
                 }
-
                 let g = (((30*this.direction*cos(this.coefAng)+this.x1) - mouseX)**2) + (((30*this.direction*sin(this.coefAng)+this.y1) - mouseY) ** 2);
                 if(g<=25){
                     this.selecionadoAng = true;
                     return true;
                 }
-
             }
+            return false;
         }
     }
 }
