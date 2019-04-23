@@ -33,7 +33,7 @@ Computação Gráfica - RayCasting2D
     * Ao clicar no ponto central do raio e arrastar o mouse, o raio será movido de acordo com a posição do mouse.  
     * Ao clicar no ponto presente da ponta da seta que indica a direção do raio, a direção será alterada de acordo com a posição do mouse enquanto o botão do mouse é pressiondado.
     * Soltar o botão do mouse finaliza a edição para ambos os casos.
-## Interseções
+## Intersecções
 1. Ao selecionar a opção "Mostrar Intersecções" um ponto colorido será adicionado a cada intersecção do raio com os limites do polígono.
     * Pontos verdes indicam que o raio está entrando no polígono.
     * Pontos vermelhos indicam que o raio está saindo do polígono.
