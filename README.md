@@ -8,7 +8,7 @@ Computação Gráfica - RayCasting2D
 - Abrir arquivo index.html em um navegador
 - Interagir com a interface definida
 
-##Instruções
+## Instruções
 ### Criação de objetos: 
 
 1. Selecionar o obeto a ser desenhado (Polígono como padrão) 
